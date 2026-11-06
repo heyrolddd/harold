@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="About Harold Rhainestone A. Villarin – personal info and achievements." />
+  <title>Harold Rhainestone A. Villarin | About</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="page-about">
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-dot" id="cursorDot"></div>
+
+  <div class="bg-fixed"><canvas id="bg"></canvas></div>
+  <div class="orb orb-about"></div>
+
+  <header class="nav">
+    <a href="index.html" class="logo">&lt;HV<span>/</span>&gt;</a>
+    <div class="nav-right">
+      <a href="index.html">Home</a>
+      <a href="about.html" class="active">About</a>
+      <a href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener">LinkedIn</a>
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme">🌙</button>
+    </div>
+  </header>
+
+  <main class="about-main">
+
+    <!-- ===== TOP: photo + terminal info card ===== -->
+    <section class="about-top">
+      <div class="about-photo">
+        <div class="photo-ring"></div>
+        <div class="photo-frame">
+          <span class="photo-initials">HV</span>
+          <img src="images/me.jpg" alt="Harold Rhainestone A. Villarin" onerror="this.remove()" />
+        </div>
+      </div>
+
+      <div class="about-intro">
+        <p class="eyebrow">About me</p>
+        <h1 class="page-title">The person behind the code.</h1>
+        <p class="lead">
+          <!-- EDIT: write 2–3 sentences about yourself -->
+          I'm a first-year BSIT student who loves turning ideas into things people can actually use.
+          I'm still early in the journey, and I'm building something new every chance I get.
+        </p>
+      </div>
+
+      <!-- Terminal card: your personal info. EDIT the values after the colons. -->
+      <div class="terminal" role="group" aria-label="Personal information">
+        <div class="term-bar">
+          <i></i><i></i><i></i>
+          <span>harold.profile</span>
+        </div>
+        <div class="term-body">
+          <p class="cmd"><span class="prompt">$</span> cat about.txt</p>
+          <dl>
+            <div><dt>name</dt><dd>Harold Rhainestone A. Villarin</dd></div>
+            <div><dt>course</dt><dd>BS Information Technology</dd></div>
+            <div><dt>year</dt><dd>1st year, CITCS</dd></div>
+            <div><dt>school</dt><dd>Your school name</dd></div>
+            <div><dt>location</dt><dd>Your city, Philippines</dd></div>
+            <div><dt>birthday</dt><dd>Month DD, YYYY</dd></div>
+            <div><dt>languages</dt><dd>Filipino, English</dd></div>
+            <div><dt>email</dt><dd><a href="mailto:you@example.com">you@example.com</a></dd></div>
+            <div><dt>status</dt><dd class="status"><b></b> Open to learning and collaborating</dd></div>
+          </dl>
+          <p class="cmd"><span class="prompt">$</span> <span class="caret">▍</span></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== NUMBERS ===== -->
+    <section class="counters" aria-label="Highlights">
+      <div><strong data-count="4">0</strong><span>Achievements</span></div>
+      <div><strong data-count="2">0</strong><span>Silver medals</span></div>
+      <div><strong data-count="2">0</strong><span>Honor recognitions</span></div>
+    </section>
+
+    <!-- ===== ACHIEVEMENTS TIMELINE ===== -->
+    <section class="achievements">
+      <h2 class="section-title">Achievements</h2>
+      <ol class="timeline">
+        <!-- EDIT: copy/paste a <li> block to add more achievements -->
+        <li class="reveal">
+          <span class="node"></span>
+          <time>Grade 9</time>
+          <h3>With Honor 🎓</h3>
+          <p>Finished Grade 9 with honors for strong academic performance.</p>
+        </li>
+        <li class="reveal">
+          <span class="node"></span>
+          <time>Grade 10</time>
+          <h3>Silver Medalist, Football 🥈⚽</h3>
+          <p>Won silver with my team in football.</p>
+        </li>
+        <li class="reveal">
+          <span class="node"></span>
+          <time>Grade 11</time>
+          <h3>Silver Medalist, Football 🥈⚽</h3>
+          <p>Won silver again, back-to-back podium finishes in football.</p>
+        </li>
+        <li class="reveal">
+          <span class="node"></span>
+          <time>Grade 12</time>
+          <h3>With Honor 🎓</h3>
+          <p>Finished Grade 12 with honors, closing out senior high on a strong note.</p>
+        </li>
+        <li class="reveal">
+          <span class="node"></span>
+          <time>2026</time>
+          <h3>Started BSIT at CITCS</h3>
+          <p>Began my college journey in Information Technology and Computer Science.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ===== SKILLS + INTERESTS ===== -->
+    <section class="two-col">
+      <div class="panel reveal">
+        <h2 class="section-title small">Skills</h2>
+        <!-- EDIT: change skill names and the --lvl percentage -->
+        <ul class="skills">
+          <li style="--lvl:70%"><span>HTML &amp; CSS</span><i></i></li>
+          <li style="--lvl:50%"><span>JavaScript</span><i></i></li>
+          <li style="--lvl:40%"><span>Python</span><i></i></li>
+          <li style="--lvl:35%"><span>Git &amp; GitHub</span><i></i></li>
+        </ul>
+      </div>
+      <div class="panel reveal">
+        <h2 class="section-title small">Beyond the screen</h2>
+        <!-- EDIT: your interests -->
+        <div class="chips">
+          <span>🎮 Gaming</span>
+          <span>🎧 Music</span>
+          <span>🎨 Design</span>
+          <span>📚 Reading</span>
+          <span>⚽ Football</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="cta center">
+      <a href="mailto:you@example.com" class="btn primary magnetic">Contact me ✉️</a>
+      <a href="index.html" class="btn ghost magnetic">← Back home</a>
+    </div>
+
+    <p class="copyright static">&copy; 2026 Harold Rhainestone A. Villarin - BSIT</p>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
