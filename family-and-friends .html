@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Family & Friends</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Figtree:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #eef3f7;
+    --surface: #ffffff;
+    --ink: #14213d;
+    --muted: #55637d;
+    --line: #d5dee8;
+    --c1: #f2a93b;  /* marigold */
+    --c2: #2a9d8f;  /* sea */
+    --c3: #7a4fb5;  /* plum */
+    --c4: #e0605e;  /* coral */
+    --display: "Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+    --body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #101a2e;
+      --surface: #182440;
+      --ink: #eef3f7;
+      --muted: #a4b1c9;
+      --line: #2b3a5c;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+  }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--c1); outline-offset: 3px; border-radius: 4px; }
+
+  .wrap { max-width: 68rem; margin: 0 auto; padding: 0 1.5rem; }
+
+  nav { padding: 1.5rem 0; }
+  nav a { font-weight: 500; text-decoration: none; border-bottom: 2px solid var(--c1); padding-bottom: 2px; }
+
+  header.hero { padding: 3rem 0 4rem; }
+  h1 {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(2.5rem, 8vw, 5.5rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin: 0 0 1.25rem;
+    max-width: 14ch;
+  }
+  .lede { max-width: 38rem; color: var(--muted); font-size: 1.2rem; margin: 0; }
+
+  section { padding: 2rem 0 3rem; }
+  h2 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 1.9rem;
+    letter-spacing: -0.02em;
+    margin: 0 0 0.35rem;
+  }
+  .section-note { color: var(--muted); margin: 0 0 2rem; max-width: 36rem; }
+
+  .grid {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: repeat(auto-fill, minmax(15.5rem, 1fr));
+  }
+  .person {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 1.25rem;
+    padding: 1.5rem;
+  }
+  /* Photo slot: swap the <span class="avatar"> for <img class="avatar" src="..." alt="Name"> */
+  .avatar {
+    display: grid;
+    place-items: center;
+    width: 5.5rem;
+    height: 5.5rem;
+    margin-bottom: 1.1rem;
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 2.2rem;
+    color: #14213d;
+    object-fit: cover;
+  }
+  .a1 { background: var(--c1); border-radius: 50% 50% 50% 12%; }
+  .a2 { background: var(--c2); border-radius: 12% 50% 50% 50%; }
+  .a3 { background: var(--c3); color: #fff; border-radius: 50% 12% 50% 50%; }
+  .a4 { background: var(--c4); border-radius: 50% 50% 12% 50%; }
+
+  .person h3 { font-family: var(--display); font-size: 1.3rem; margin: 0; letter-spacing: -0.01em; }
+  .role { color: var(--muted); font-size: 0.95rem; margin: 0.1rem 0 0.75rem; }
+  .person p.note { margin: 0; }
+
+  footer { padding: 2rem 0 4rem; color: var(--muted); border-top: 1px solid var(--line); }
+  footer a { color: var(--ink); }
+
+  @media (prefers-reduced-motion: no-preference) {
+    header.hero h1 { animation: rise .7s ease both; }
+    @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav><a href="index.html">Back to portfolio</a></nav>
+
+  <header class="hero">
+    <h1>The people behind the work</h1>
+    <p class="lede">Everything on this site has someone cheering behind it. Here are the family and friends who’ve helped me get here.</p>
+  </header>
+
+  <section id="family">
+    <h2>Family</h2>
+    <p class="section-note">The ones who’ve been there from the start.</p>
+    <div class="grid">
+      <!-- Copy this block for each person -->
+      <article class="person">
+        <span class="avatar a1" aria-hidden="true">M</span>
+        <h3>Mom’s name</h3>
+        <p class="role">Mother</p>
+        <p class="note">Write a line or two about them: what they taught you, or a favorite memory.</p>
+      </article>
+      <article class="person">
+        <span class="avatar a2" aria-hidden="true">D</span>
+        <h3>Dad’s name</h3>
+        <p class="role">Father</p>
+        <p class="note">Write a line or two about them.</p>
+      </article>
+      <article class="person">
+        <span class="avatar a3" aria-hidden="true">S</span>
+        <h3>Sibling’s name</h3>
+        <p class="role">Sister or brother</p>
+        <p class="note">Write a line or two about them.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="friends">
+    <h2>Friends</h2>
+    <p class="section-note">The people who make the days better.</p>
+    <div class="grid">
+      <article class="person">
+        <span class="avatar a4" aria-hidden="true">A</span>
+        <h3>Friend’s name</h3>
+        <p class="role">Friend since school</p>
+        <p class="note">Write a line or two about how you met or what you do together.</p>
+      </article>
+      <article class="person">
+        <span class="avatar a1" aria-hidden="true">B</span>
+        <h3>Friend’s name</h3>
+        <p class="role">Friend from work</p>
+        <p class="note">Write a line or two about them.</p>
+      </article>
+      <article class="person">
+        <span class="avatar a2" aria-hidden="true">C</span>
+        <h3>Friend’s name</h3>
+        <p class="role">Travel buddy</p>
+        <p class="note">Write a line or two about them.</p>
+      </article>
+    </div>
+  </section>
+
+  <footer>
+    <p>Want to say hi? <a href="mailto:you@example.com">you@example.com</a></p>
+  </footer>
+
+</div>
+</body>
+</html>
