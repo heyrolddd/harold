@@ -31,7 +31,7 @@
   </header>
 
   <main class="ach-main">
-    <!-- left: intro -->
+    <!-- left: intro, stats, education -->
     <section class="ach-intro">
       <p class="eyebrow">Achievements</p>
       <h1 class="page-title">Milestones I'm proud of.</h1>
@@ -43,18 +43,16 @@
         <div class="ach-stat"><strong id="statPodium">0</strong><span>Top-3 finishes</span></div>
       </div>
 
+      <div class="edu-mini" id="eduMini" aria-label="Educational attainment"></div>
+
       <div class="cta">
         <a href="index.html" class="btn ghost magnetic">← Home</a>
         <a href="mailto:villarinharoldrhainestone@gmail.com" class="btn primary magnetic">Contact me ✉️</a>
       </div>
     </section>
 
-    <!-- right: tabs + content (rendered from the data in the script below) -->
-    <section class="ach-right">
-      <div class="tabs" id="tabs" role="tablist" aria-label="Achievement categories"></div>
-      <p class="panel-note" id="panelNote"></p>
-      <div class="panel" id="panel" role="tabpanel" tabindex="-1"></div>
-    </section>
+    <!-- right: all categories at once (rendered from the data in the script below) -->
+    <section class="cats" id="cats" aria-label="Certificates by category"></section>
   </main>
 
   <p class="copyright">© 2026 Harold Rhainestone A. Villarin - BSIT</p>
@@ -67,6 +65,7 @@
     <div class="lb-inner">
       <img id="lbImg" src="" alt="" />
       <div class="lb-cap">
+        <p class="lb-cat" id="lbCat"></p>
         <h3 id="lbTitle"></h3>
         <p class="lb-meta" id="lbMeta"></p>
         <p class="lb-desc" id="lbDesc"></p>
@@ -82,36 +81,12 @@
        Photos live in the "images" folder next to this file.
        ===================================================================== */
 
-    // ---- Education (newest first) ----
-    // To add Elementary, copy a block, e.g.:
-    // { level: "Elementary", title: "Elementary Education", school: "Your School, City", start: 2014, end: 2020, detail: "...", highlights: [] }
+    // ---- Education (newest first), shown in the small card on the left ----
+    // To add Elementary: { title: "Elementary", school: "Your School", start: 2014, end: 2020 }
     const EDUCATION = [
-      {
-        level: "College",
-        title: "Bachelor of Science in Information Technology",
-        school: "University of the Cordilleras · CITCS, Baguio City",
-        start: 2026, end: "Present", current: true,
-        detail: "Currently a first-year student learning programming, web development and problem solving.",
-        highlights: ["1st year", "CITCS", "In progress"]
-      },
-      {
-        level: "Senior High School",
-        title: "Academic Track · STEM Strand",
-        school: "Sta. Maria National High School · Alfonso Lista, Ifugao",
-        logo: "images/logo.jpg",
-        start: 2024, end: 2026,
-        detail: "Completed Senior High School on March 31, 2026, earning With Honors recognitions along the way.",
-        highlights: ["With Honors", "STEM", "Graduated 2026"]
-      },
-      {
-        level: "Junior High School",
-        title: "Junior High School Completion",
-        school: "Sta. Maria National High School · Alfonso Lista, Ifugao",
-        logo: "images/logo.jpg",
-        start: 2020, end: 2024,
-        detail: "Completed the Junior High School curriculum on May 28, 2024, and graduated With Honors in Grade 9.",
-        highlights: ["With Honors (Grade 9)", "Completed 2024"]
-      }
+      { title: "BS Information Technology", school: "University of the Cordilleras · CITCS", start: 2026, end: "Present", current: true },
+      { title: "STEM · Senior High School", school: "Sta. Maria National High School", start: 2024, end: 2026 },
+      { title: "Junior High School", school: "Sta. Maria National High School", start: 2020, end: 2024 }
     ];
 
     // ---- Certificates, sorted into categories (newest first) ----
@@ -120,7 +95,7 @@
     const CATEGORIES = [
       {
         id: "curricular", label: "Curricular",
-        note: "Academic honors and diplomas earned through my classes.",
+        note: "Academic honors and diplomas earned through my classes",
         items: [
           { title: "Senior High School Diploma", meta: "Mar 31, 2026 · STEM, Academic Track", feature: true,
             desc: "Katibayan (diploma) from Sta. Maria National High School for completing Senior High School in the Science, Technology, Engineering and Mathematics strand.",
@@ -147,13 +122,13 @@
       },
       {
         id: "co-curricular", label: "Co-curricular",
-        note: "Competitions that extend classroom learning, from campus journalism to poster making.",
+        note: "Competitions that extend classroom learning",
         items: [
-          { title: "1st Place · Online Publication (Filipino)", meta: "Feb 5–7, 2026 · Division Schools Press Conference", place: 1, feature: true,
-            desc: "Secondary level, held at Lagawe Central School, Lagawe, Ifugao. Theme: Empowering Filipino Youth in journalism and the creative industries in the era of AI.",
+          { title: "1st Place · Online Publication (Filipino)", meta: "Feb 5–7, 2026 · Division Press Conference", place: 1,
+            desc: "Secondary level, 2026 Division Schools Press Conference, held at Lagawe Central School, Lagawe, Ifugao. Theme: Empowering Filipino Youth in journalism and the creative industries in the era of AI.",
             images: [{ src: "images/opub_dspc.jpg", alt: "First place certificate, Online Publication, 2026 Division Schools Press Conference" }] },
-          { title: "4th Place · Online Publishing (Filipino)", meta: "Mar 10–13, 2026 · Regional Schools Press Conference", place: 4,
-            desc: "Secondary level, held in Bangued, Abra. Theme: Roots and Rise: Local Stories, Global Echoes.",
+          { title: "4th Place · Online Publishing (Filipino)", meta: "Mar 10–13, 2026 · Regional Press Conference", place: 4,
+            desc: "Secondary level, 2026 Regional Schools Press Conference, held in Bangued, Abra. Theme: Roots and Rise: Local Stories, Global Echoes.",
             images: [{ src: "images/opub_abra.jpg", alt: "Fourth place certificate, Online Publishing, 2026 Regional Schools Press Conference" }] },
           { title: "2nd Place · Poster Making", meta: "Jan 30 – Feb 3, 2023 · Career Guidance Week", place: 2,
             desc: "SMNHS Career Guidance Week and Festival of Talents. Theme: Creating Opportunities and Building the Future through Career Education.",
@@ -162,7 +137,7 @@
       },
       {
         id: "extra-curricular", label: "Extra-curricular",
-        note: "Sports and community activities beyond the classroom.",
+        note: "Sports and community activities",
         items: [
           { title: "2nd Place · Football (Secondary)", meta: "Apr 14, 2025 · Provincial Athletic Meet", place: 2,
             desc: "Recognized for skills, commitment and sportsmanship at the 2025 Provincial Athletic Meet in Ubao, Aguinaldo, Ifugao. Includes a photo with the medals.",
@@ -183,12 +158,6 @@
       const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
       const ordinal = n => n + (["th", "st", "nd", "rd"][(n % 100 >> 3 ^ 1) && n % 10 < 4 ? n % 10 : 0]);
 
-      const TABS = [{ id: "education", label: "Education", note: "Where I've studied and what I've completed.", count: EDUCATION.length }]
-        .concat(CATEGORIES.map(c => ({ id: c.id, label: c.label, note: c.note, count: c.items.length })));
-
-      const tabsEl = $("#tabs"), panel = $("#panel"), noteEl = $("#panelNote");
-      let active = "education";
-
       /* ---------- stats ---------- */
       const all = CATEGORIES.flatMap(c => c.items);
       const countTo = (id, target) => {
@@ -204,81 +173,37 @@
       countTo("statHonors", all.filter(i => i.honors).length);
       countTo("statPodium", all.filter(i => i.place && i.place <= 3).length);
 
-      /* ---------- tabs ---------- */
-      tabsEl.innerHTML = TABS.map(t =>
-        `<button class="tab" role="tab" id="tab-${t.id}" data-tab="${t.id}" aria-controls="panel">${esc(t.label)}<span class="count">${t.count}</span></button>`).join("");
-
-      tabsEl.addEventListener("click", e => {
-        const b = e.target.closest(".tab");
-        if (b) select(b.dataset.tab, true);
-      });
-      tabsEl.addEventListener("keydown", e => {
-        if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
-        const i = TABS.findIndex(t => t.id === active);
-        const n = TABS[(i + (e.key === "ArrowRight" ? 1 : TABS.length - 1)) % TABS.length].id;
-        select(n, true); $("#tab-" + n).focus();
-      });
-
-      function select(id, updateHash) {
-        if (!TABS.some(t => t.id === id)) id = "education";
-        active = id;
-        TABS.forEach(t => {
-          const b = $("#tab-" + t.id);
-          b.setAttribute("aria-selected", String(t.id === id));
-          b.tabIndex = t.id === id ? 0 : -1;
-        });
-        panel.setAttribute("aria-labelledby", "tab-" + id);
-        noteEl.textContent = TABS.find(t => t.id === id).note;
-        panel.scrollTop = 0;
-        if (id === "education") renderEducation(); else renderGallery(CATEGORIES.find(c => c.id === id));
-        if (updateHash) { try { history.replaceState(null, "", "#" + id); } catch (e) {} }
-      }
-
-      /* ---------- education ---------- */
-      function renderEducation() {
-        panel.innerHTML = `<div class="timeline" aria-label="Educational attainment">` + EDUCATION.map((e, i) => `
-          <article class="edu-card${e.current ? " current" : ""}" style="--i:${i}">
-            <div class="edu-top">
-              <span class="edu-level">${esc(e.level)}</span>
-              <span class="edu-years">${esc(e.start)} – ${esc(e.end)}</span>
-            </div>
-            <div class="edu-head">
-              ${e.logo ? `<img src="${esc(e.logo)}" alt="" loading="lazy" />` : ""}
-              <h2>${esc(e.title)}</h2>
-            </div>
-            <p class="edu-school">${esc(e.school)}</p>
-            ${e.detail ? `<p class="edu-detail">${esc(e.detail)}</p>` : ""}
-            ${e.highlights && e.highlights.length ? `<div class="chips">${e.highlights.map((h, k) =>
-              `<span class="chip${e.current && k === e.highlights.length - 1 ? " live" : ""}">${esc(h)}</span>`).join("")}</div>` : ""}
-          </article>`).join("") + `</div>`;
-      }
+      /* ---------- education (compact card) ---------- */
+      $("#eduMini").innerHTML = `<h2>Education</h2>` + EDUCATION.map(e => `
+        <div class="edu-row${e.current ? " current" : ""}">
+          <b>${esc(e.title)}</b><span>${esc(e.school)}</span><em>${esc(e.start)}–${esc(e.end)}</em>
+        </div>`).join("");
 
       /* ---------- gallery ---------- */
-      // grid shape so the cards always fill the whole panel
+      // grid shape per category so the cards always fill their area
       function shape(n) {
         if (n === 7) return { cols: 4, rows: 2, fc: 2, fr: 1 };   // 1 wide card + 6 small = 8 slots
-        if (n === 3) return { cols: 2, rows: 2, fc: 1, fr: 2 };   // 1 tall card + 2 stacked
         const cols = Math.min(4, n);
         return { cols, rows: Math.ceil(n / cols), fc: 1, fr: 1 };
       }
 
-      let slides = [];   // flat list of photos in the active category, used by the lightbox
+      const slides = [];   // every photo on the page, in display order, used by the lightbox
+      let card = 0;
 
-      function renderGallery(cat) {
+      $("#cats").innerHTML = CATEGORIES.map((cat, ci) => {
         // featured card goes first, the rest keep their (newest-first) order
         const items = cat.items.slice().sort((a, b) => (b.feature ? 1 : 0) - (a.feature ? 1 : 0));
         const s = shape(items.length);
-        slides = [];
-        const cards = items.map((it, i) => {
+        const cards = items.map(it => {
           const first = slides.length;
-          it.images.forEach(img => slides.push({ src: img.src, alt: img.alt, title: it.title, meta: it.meta, desc: it.desc }));
-          const feat = it.feature && items.length > 1 && (s.fc > 1 || s.fr > 1);
+          it.images.forEach(img => slides.push({ src: img.src, alt: img.alt, title: it.title, meta: it.meta, desc: it.desc, cat: cat.label }));
+          const feat = it.feature && (s.fc > 1 || s.fr > 1);
           const badges = [
             it.place ? `<span class="badge${it.place <= 3 ? " podium" : ""}">${ordinal(it.place)} place</span>` : "",
             it.honors ? `<span class="badge podium">With Honors</span>` : ""
           ].join("");
           return `
-          <button class="shot${feat ? " feature" : ""}" data-slide="${first}" style="--i:${i}" aria-label="View ${esc(it.title)}">
+          <button class="shot${feat ? " feature" : ""}" data-slide="${first}" style="--i:${card++}" aria-label="View ${esc(it.title)}">
             <div class="shot-img" style="--img:url('${esc(it.images[0].src)}')">
               <img src="${esc(it.images[0].src)}" alt="${esc(it.images[0].alt)}" loading="lazy" />
               <div class="shot-badges">${badges}</div>
@@ -288,10 +213,14 @@
             <div class="shot-cap"><h3>${esc(it.title)}</h3><p>${esc(it.meta)}</p></div>
           </button>`;
         }).join("");
-        panel.innerHTML = `<div class="gallery" style="--cols:${s.cols};--rows:${s.rows};--fc:${s.fc};--fr:${s.fr}">${cards}</div>`;
-      }
+        return `
+        <section class="cat${ci === 0 ? " wide" : ""}" id="${esc(cat.id)}" aria-label="${esc(cat.label)}">
+          <div class="cat-head"><h2>${esc(cat.label)}</h2><span class="count">${items.length}</span><span class="note">${esc(cat.note)}</span></div>
+          <div class="gallery" style="--cols:${s.cols};--rows:${s.rows};--fc:${s.fc};--fr:${s.fr}">${cards}</div>
+        </section>`;
+      }).join("");
 
-      panel.addEventListener("click", e => {
+      $("#cats").addEventListener("click", e => {
         const b = e.target.closest(".shot");
         if (b) openLb(+b.dataset.slide, b);
       });
@@ -303,6 +232,7 @@
         cur = (i + slides.length) % slides.length;
         const s = slides[cur];
         lbImg.src = s.src; lbImg.alt = s.alt;
+        $("#lbCat").textContent = s.cat;
         $("#lbTitle").textContent = s.title;
         $("#lbMeta").textContent = s.meta;
         $("#lbDesc").textContent = s.desc || "";
@@ -341,10 +271,6 @@
       const cursor = $("#cursor");
       document.addEventListener("mouseover", e => { if (cursor && e.target.closest("button, a")) cursor.classList.add("hover"); });
       document.addEventListener("mouseout", e => { if (cursor && e.target.closest("button, a")) cursor.classList.remove("hover"); });
-
-      /* ---------- start (supports links like achievements.html#curricular) ---------- */
-      select(location.hash.slice(1), false);
-      window.addEventListener("hashchange", () => select(location.hash.slice(1), false));
     })();
   </script>
 </body>
