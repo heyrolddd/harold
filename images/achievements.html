@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Achievements, honors and educational attainment of Harold Rhainestone A. Villarin." />
+  <title>Harold Rhainestone A. Villarin | Achievements</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="achievements.css" />
+</head>
+<body class="page-ach">
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-dot" id="cursorDot"></div>
+
+  <canvas id="bg" class="bg-fixed"></canvas>
+  <div class="orb orb-about"></div>
+
+  <header class="nav">
+    <a href="index.html" class="logo">&lt;HV<span>/</span>&gt;</a>
+    <nav class="nav-right">
+      <a href="index.html">Home</a>
+      <a href="about.html">Personal Info</a>
+      <a href="achievements.html" class="active">Achievements</a>
+      <a href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener">LinkedIn</a>
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme">🌙</button>
+    </nav>
+  </header>
+
+  <main class="ach-main">
+    <!-- left: intro, stats, education -->
+    <section class="ach-intro">
+      <p class="eyebrow">Achievements</p>
+      <h1 class="page-title">Milestones I'm proud of.</h1>
+      <p class="lead">Honors, diplomas and recognitions from the classroom, competitions and community events. Tap any card to see the full certificate.</p>
+
+      <div class="ach-stats">
+        <div class="ach-stat"><strong id="statCerts">0</strong><span>Certificates</span></div>
+        <div class="ach-stat"><strong id="statHonors">0</strong><span>With Honors</span></div>
+        <div class="ach-stat"><strong id="statPodium">0</strong><span>Top-3 finishes</span></div>
+      </div>
+
+      <div class="edu-mini" id="eduMini" aria-label="Educational attainment"></div>
+
+      <div class="cta">
+        <a href="index.html" class="btn ghost magnetic">← Home</a>
+        <a href="mailto:villarinharoldrhainestone@gmail.com" class="btn primary magnetic">Contact me ✉️</a>
+      </div>
+    </section>
+
+    <!-- right: all categories at once (rendered from the data in the script below) -->
+    <section class="cats" id="cats" aria-label="Certificates by category"></section>
+  </main>
+
+  <p class="copyright">© 2026 Harold Rhainestone A. Villarin - BSIT</p>
+
+  <!-- lightbox -->
+  <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Certificate viewer">
+    <button class="lb-btn lb-close" id="lbClose" aria-label="Close">✕</button>
+    <button class="lb-btn lb-prev" id="lbPrev" aria-label="Previous">‹</button>
+    <button class="lb-btn lb-next" id="lbNext" aria-label="Next">›</button>
+    <div class="lb-inner">
+      <img id="lbImg" src="" alt="" />
+      <div class="lb-cap">
+        <p class="lb-cat" id="lbCat"></p>
+        <h3 id="lbTitle"></h3>
+        <p class="lb-meta" id="lbMeta"></p>
+        <p class="lb-desc" id="lbDesc"></p>
+        <p class="lb-count" id="lbCount"></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    /* =====================================================================
+       EDIT YOUR CONTENT HERE
+       Photos live in the "images" folder next to this file.
+       ===================================================================== */
+
+    // ---- Education (newest first), shown in the small card on the left ----
+    // To add Elementary: { title: "Elementary", school: "Your School", start: 2014, end: 2020 }
+    const EDUCATION = [
+      { title: "BS Information Technology", school: "University of the Cordilleras · CITCS", start: 2026, end: "Present", current: true },
+      { title: "STEM · Senior High School", school: "Sta. Maria National High School", start: 2024, end: 2026 },
+      { title: "Junior High School", school: "Sta. Maria National High School", start: 2020, end: 2024 }
+    ];
+
+    // ---- Certificates, sorted into categories (newest first) ----
+    // honors: true  -> "With Honors" badge     place: 1/2/3/4... -> placement badge (1-3 are highlighted)
+    // feature: true -> shown as the big card   images: one or more photos (more than one adds a "2 photos" badge)
+    const CATEGORIES = [
+      {
+        id: "curricular", label: "Curricular",
+        note: "Academic honors and diplomas earned through my classes",
+        items: [
+          { title: "Senior High School Diploma", meta: "Mar 31, 2026 · STEM, Academic Track", feature: true,
+            desc: "Katibayan (diploma) from Sta. Maria National High School for completing Senior High School in the Science, Technology, Engineering and Mathematics strand.",
+            images: [{ src: "images/graduation.jpg", alt: "Senior High School diploma, STEM strand, with a Graduate ribbon" }] },
+          { title: "With Honors · First Semester", meta: "Nov 17, 2025 · SY 2025–2026", honors: true,
+            desc: "Certificate of Recognition for exemplary academic achievement in the first semester, Senior High School.",
+            images: [{ src: "images/1st_sem_g12.jpg", alt: "With Honors certificate for the first semester of school year 2025-2026" }] },
+          { title: "With Honors · Fourth Quarter", meta: "Mar 27, 2025 · Senior High School", honors: true,
+            desc: "Certificate of Recognition for exemplary academic achievement in the fourth quarter.",
+            images: [{ src: "images/w_honor_4th_quarter_g12.jpg", alt: "With Honors certificate for the fourth quarter" }] },
+          { title: "With Honors · Third Quarter", meta: "Feb 5, 2025 · Senior High School", honors: true,
+            desc: "Certificate of Recognition for exemplary academic achievement in the third quarter.",
+            images: [{ src: "images/3rd_quarter_g12.jpg", alt: "With Honors certificate for the third quarter" }] },
+          { title: "With Honors · Second Quarter", meta: "Dec 18, 2024 · SY 2024–2025", honors: true,
+            desc: "Certificate of Recognition for exemplary academic achievement in the second quarter, Senior High School.",
+            images: [{ src: "images/2nd_quarter_g11.jpg", alt: "With Honors certificate for the second quarter of school year 2024-2025" }] },
+          { title: "Junior High School Completion", meta: "May 28, 2024 · Katunayan",
+            desc: "Katunayan (certificate) for satisfactorily completing the Junior High School curriculum at Sta. Maria National High School.",
+            images: [{ src: "images/moving_up.jpg", alt: "Junior High School completion certificate (Katunayan)" }] },
+          { title: "With Honors · Grade 9", meta: "Jun–Jul 2023 · SY 2022–2023", honors: true,
+            desc: "Fourth-quarter honors and the school-year average equivalent to With Honors, with the medal.",
+            images: [{ src: "images/w_honor_g9.jpg", alt: "Two With Honors certificates and a medal for Grade 9" }] }
+        ]
+      },
+      {
+        id: "co-curricular", label: "Co-curricular",
+        note: "Competitions that extend classroom learning",
+        items: [
+          { title: "1st Place · Online Publication (Filipino)", meta: "Feb 5–7, 2026 · Division Press Conference", place: 1,
+            desc: "Secondary level, 2026 Division Schools Press Conference, held at Lagawe Central School, Lagawe, Ifugao. Theme: Empowering Filipino Youth in journalism and the creative industries in the era of AI.",
+            images: [{ src: "images/opub_dspc.jpg", alt: "First place certificate, Online Publication, 2026 Division Schools Press Conference" }] },
+          { title: "4th Place · Online Publishing (Filipino)", meta: "Mar 10–13, 2026 · Regional Press Conference", place: 4,
+            desc: "Secondary level, 2026 Regional Schools Press Conference, held in Bangued, Abra. Theme: Roots and Rise: Local Stories, Global Echoes.",
+            images: [{ src: "images/opub_abra.jpg", alt: "Fourth place certificate, Online Publishing, 2026 Regional Schools Press Conference" }] },
+          { title: "2nd Place · Poster Making", meta: "Jan 30 – Feb 3, 2023 · Career Guidance Week", place: 2,
+            desc: "SMNHS Career Guidance Week and Festival of Talents. Theme: Creating Opportunities and Building the Future through Career Education.",
+            images: [{ src: "images/poster_making.jpg", alt: "Second place certificate, Poster Making, Career Guidance Week 2023" }] }
+        ]
+      },
+      {
+        id: "extra-curricular", label: "Extra-curricular",
+        note: "Sports and community activities",
+        items: [
+          { title: "2nd Place · Football (Secondary)", meta: "Apr 14, 2025 · Provincial Athletic Meet", place: 2,
+            desc: "Recognized for skills, commitment and sportsmanship at the 2025 Provincial Athletic Meet in Ubao, Aguinaldo, Ifugao. Includes a photo with the medals.",
+            images: [
+              { src: "images/prov__g11.jpg", alt: "Certificate for second place in Football, 2025 Provincial Athletic Meet" },
+              { src: "images/prov_g11_medals.jpg", alt: "The football certificate with the medals" }
+            ] },
+          { title: "Runway Model · Ammung 2023 Ethnic Fashion Show", meta: "May 6, 2023 · Alfonso Lista, Ifugao",
+            desc: "Certificate of Recognition from the Municipality of Alfonso Lista for taking part as a runway model.",
+            images: [{ src: "images/ethnic.jpg", alt: "Certificate of recognition for the Ammung 2023 Ethnic Fashion Show" }] }
+        ]
+      }
+    ];
+    /* ===================================================================== */
+
+    (function () {
+      const $ = (s, el = document) => el.querySelector(s);
+      const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+      const ordinal = n => n + (["th", "st", "nd", "rd"][(n % 100 >> 3 ^ 1) && n % 10 < 4 ? n % 10 : 0]);
+
+      /* ---------- stats ---------- */
+      const all = CATEGORIES.flatMap(c => c.items);
+      const countTo = (id, target) => {
+        const el = document.getElementById(id), t0 = performance.now() + 400, dur = 1300;
+        (function step(now) {
+          if (now < t0) return requestAnimationFrame(step);
+          const p = Math.min((now - t0) / dur, 1);
+          el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+          if (p < 1) requestAnimationFrame(step);
+        })(performance.now());
+      };
+      countTo("statCerts", all.length);
+      countTo("statHonors", all.filter(i => i.honors).length);
+      countTo("statPodium", all.filter(i => i.place && i.place <= 3).length);
+
+      /* ---------- education (compact card) ---------- */
+      $("#eduMini").innerHTML = `<h2>Education</h2>` + EDUCATION.map(e => `
+        <div class="edu-row${e.current ? " current" : ""}">
+          <b>${esc(e.title)}</b><span>${esc(e.school)}</span><em>${esc(e.start)}–${esc(e.end)}</em>
+        </div>`).join("");
+
+      /* ---------- gallery ---------- */
+      // grid shape per category so the cards always fill their area
+      function shape(n) {
+        if (n === 7) return { cols: 4, rows: 2, fc: 2, fr: 1 };   // 1 wide card + 6 small = 8 slots
+        const cols = Math.min(4, n);
+        return { cols, rows: Math.ceil(n / cols), fc: 1, fr: 1 };
+      }
+
+      const slides = [];   // every photo on the page, in display order, used by the lightbox
+      let card = 0;
+
+      $("#cats").innerHTML = CATEGORIES.map((cat, ci) => {
+        // featured card goes first, the rest keep their (newest-first) order
+        const items = cat.items.slice().sort((a, b) => (b.feature ? 1 : 0) - (a.feature ? 1 : 0));
+        const s = shape(items.length);
+        const cards = items.map(it => {
+          const first = slides.length;
+          it.images.forEach(img => slides.push({ src: img.src, alt: img.alt, title: it.title, meta: it.meta, desc: it.desc, cat: cat.label }));
+          const feat = it.feature && (s.fc > 1 || s.fr > 1);
+          const badges = [
+            it.place ? `<span class="badge${it.place <= 3 ? " podium" : ""}">${ordinal(it.place)} place</span>` : "",
+            it.honors ? `<span class="badge podium">With Honors</span>` : ""
+          ].join("");
+          return `
+          <button class="shot${feat ? " feature" : ""}" data-slide="${first}" style="--i:${card++}" aria-label="View ${esc(it.title)}">
+            <div class="shot-img" style="--img:url('${esc(it.images[0].src)}')">
+              <img src="${esc(it.images[0].src)}" alt="${esc(it.images[0].alt)}" loading="lazy" />
+              <div class="shot-badges">${badges}</div>
+              ${it.images.length > 1 ? `<span class="badge photos">${it.images.length} photos</span>` : ""}
+              <span class="shot-zoom" aria-hidden="true">⤢</span>
+            </div>
+            <div class="shot-cap"><h3>${esc(it.title)}</h3><p>${esc(it.meta)}</p></div>
+          </button>`;
+        }).join("");
+        return `
+        <section class="cat${ci === 0 ? " wide" : ""}" id="${esc(cat.id)}" aria-label="${esc(cat.label)}">
+          <div class="cat-head"><h2>${esc(cat.label)}</h2><span class="count">${items.length}</span><span class="note">${esc(cat.note)}</span></div>
+          <div class="gallery" style="--cols:${s.cols};--rows:${s.rows};--fc:${s.fc};--fr:${s.fr}">${cards}</div>
+        </section>`;
+      }).join("");
+
+      $("#cats").addEventListener("click", e => {
+        const b = e.target.closest(".shot");
+        if (b) openLb(+b.dataset.slide, b);
+      });
+
+      /* ---------- lightbox ---------- */
+      const lb = $("#lb"), lbImg = $("#lbImg");
+      let cur = 0, opener = null;
+      function showSlide(i) {
+        cur = (i + slides.length) % slides.length;
+        const s = slides[cur];
+        lbImg.src = s.src; lbImg.alt = s.alt;
+        $("#lbCat").textContent = s.cat;
+        $("#lbTitle").textContent = s.title;
+        $("#lbMeta").textContent = s.meta;
+        $("#lbDesc").textContent = s.desc || "";
+        $("#lbCount").textContent = (cur + 1) + " / " + slides.length;
+        $("#lbPrev").hidden = $("#lbNext").hidden = slides.length < 2;
+      }
+      function openLb(i, from) {
+        opener = from; showSlide(i);
+        lb.classList.add("open"); document.documentElement.classList.add("lb-open");
+        $("#lbClose").focus();
+      }
+      function closeLb() {
+        lb.classList.remove("open"); document.documentElement.classList.remove("lb-open");
+        if (opener) opener.focus();
+      }
+      $("#lbClose").addEventListener("click", closeLb);
+      $("#lbPrev").addEventListener("click", () => showSlide(cur - 1));
+      $("#lbNext").addEventListener("click", () => showSlide(cur + 1));
+      lb.addEventListener("click", e => { if (e.target === lb || e.target.classList.contains("lb-inner")) closeLb(); });
+      document.addEventListener("keydown", e => {
+        if (!lb.classList.contains("open")) return;
+        if (e.key === "Escape") closeLb();
+        else if (e.key === "ArrowLeft") showSlide(cur - 1);
+        else if (e.key === "ArrowRight") showSlide(cur + 1);
+      });
+      // simple swipe on touch screens
+      let tx = null;
+      lb.addEventListener("touchstart", e => { tx = e.touches[0].clientX; }, { passive: true });
+      lb.addEventListener("touchend", e => {
+        if (tx === null) return;
+        const dx = e.changedTouches[0].clientX - tx; tx = null;
+        if (Math.abs(dx) > 50) showSlide(cur + (dx < 0 ? 1 : -1));
+      });
+
+      /* ---------- custom cursor hover for buttons created after load ---------- */
+      const cursor = $("#cursor");
+      document.addEventListener("mouseover", e => { if (cursor && e.target.closest("button, a")) cursor.classList.add("hover"); });
+      document.addEventListener("mouseout", e => { if (cursor && e.target.closest("button, a")) cursor.classList.remove("hover"); });
+    })();
+  </script>
+</body>
+</html>
