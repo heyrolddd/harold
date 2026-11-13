@@ -1,0 +1,115 @@
+/* =========================================================
+   PAGE 3 - ACHIEVEMENTS (fills the whole screen)
+   Loads AFTER style.css and reuses its variables.
+   ========================================================= */
+html:has(.page-ach), .page-ach { min-height: 100%; }
+
+.ach-main {
+  position: relative; z-index: 1;
+  min-height: 100vh; min-height: 100dvh;
+  height: 100vh; height: 100dvh;
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(280px, 0.8fr) minmax(0, 1.7fr);
+  gap: clamp(32px, 5vw, 96px);
+  align-items: stretch;
+  padding: 92px 6vw 56px;
+}
+
+/* ---------- left: intro ---------- */
+.ach-intro {
+  display: flex; flex-direction: column; justify-content: center; gap: 18px;
+}
+.ach-intro .eyebrow { font-size: clamp(1.1rem, 1.8vw, 1.5rem); margin-bottom: 0; }
+.ach-intro .page-title { font-size: clamp(2rem, 4.6vw, 4rem); margin-bottom: 0; }
+.ach-intro .lead { max-width: 440px; }
+
+.ach-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 6px; }
+.ach-stat {
+  background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+  padding: 16px 14px; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+}
+.ach-stat strong { display: block; font-size: clamp(1.5rem, 2.6vw, 2.2rem); color: var(--a2); line-height: 1.1; }
+.ach-stat span { color: var(--muted); font-size: 0.82rem; }
+
+.ach-intro .cta { margin: 10px 0 0; }
+
+/* ---------- right: timeline that stretches to fill the screen ---------- */
+.timeline {
+  position: relative; display: flex; flex-direction: column; gap: clamp(12px, 2vh, 22px);
+  height: 100%; min-height: 0; padding-left: 38px;
+}
+.timeline::before {
+  content: ""; position: absolute; left: 11px; top: 14px; bottom: 14px; width: 2px;
+  background: linear-gradient(to bottom, var(--a1), var(--a2)); opacity: 0.55; border-radius: 2px;
+}
+
+.edu-card {
+  position: relative; flex: 1 1 0; min-height: 0;
+  display: flex; flex-direction: column; justify-content: center; gap: 6px;
+  padding: clamp(14px, 2.2vh, 26px) clamp(18px, 2vw, 32px);
+  background: var(--card); border: 1px solid var(--border); border-radius: 18px;
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+  overflow: hidden;
+}
+.edu-card:hover { transform: translateX(8px); border-color: var(--a2); box-shadow: 0 16px 50px rgba(124, 92, 255, 0.3); }
+
+.edu-card::before { /* timeline dot */
+  content: ""; position: absolute; left: -35px; top: 50%; width: 14px; height: 14px; margin-top: -7px;
+  border-radius: 50%; background: var(--bg); border: 3px solid var(--a1);
+}
+.edu-card.current { border-color: rgba(0, 224, 198, 0.5); box-shadow: 0 16px 50px rgba(0, 224, 198, 0.15); }
+.edu-card.current::before { border-color: var(--a2); animation: pulse 2s infinite; }
+
+.edu-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.edu-level {
+  font-family: "JetBrains Mono", monospace; font-size: 0.8rem; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--a1);
+}
+.edu-years { font-family: "JetBrains Mono", monospace; font-size: 0.85rem; color: var(--a2); }
+
+.edu-card h2 { font-size: clamp(1.1rem, 2.1vw, 1.7rem); line-height: 1.25; font-weight: 700; }
+.edu-school { color: var(--muted); font-size: clamp(0.9rem, 1.3vw, 1.05rem); }
+.edu-detail { color: var(--muted); font-size: 0.92rem; line-height: 1.5; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.chip {
+  font-family: "JetBrains Mono", monospace; font-size: 0.75rem; padding: 4px 12px; border-radius: 50px;
+  border: 1px solid var(--border); background: rgba(124, 92, 255, 0.14); color: var(--text);
+}
+.chip.live { border-color: rgba(0, 224, 198, 0.5); background: rgba(0, 224, 198, 0.12); }
+
+/* scroll reveal (script.js adds .in) */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.in { opacity: 1; transform: none; }
+.edu-card.reveal.in:hover { transform: translateX(8px); }
+
+/* ---------- short laptop screens ---------- */
+@media (max-height: 720px) {
+  .ach-main { padding-top: 76px; padding-bottom: 44px; }
+  .ach-intro .lead { display: none; }
+  .edu-detail { display: none; }
+  .ach-stat { padding: 10px; }
+}
+
+/* ---------- tablets & phones: stack and allow scrolling ---------- */
+@media (max-width: 900px) {
+  html:has(.page-ach), .page-ach { overflow-y: auto; }
+  .ach-main {
+    height: auto; min-height: 100dvh;
+    grid-template-columns: minmax(0, 1fr); gap: 28px; padding: 84px 5vw 64px;
+  }
+  .ach-intro { text-align: center; align-items: center; }
+  .ach-intro .cta { justify-content: center; }
+  .timeline { height: auto; }
+  .edu-card { flex: 0 0 auto; }
+  .edu-detail { display: block; }
+  .ach-intro .lead { display: block; }
+}
+@media (max-width: 520px) {
+  .ach-stats { gap: 8px; }
+  .timeline { padding-left: 30px; }
+  .timeline::before { left: 7px; }
+  .edu-card::before { left: -29px; width: 12px; height: 12px; margin-top: -6px; }
+}
