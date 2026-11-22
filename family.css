@@ -1,0 +1,115 @@
+/* =========================================================
+   FAMILY & FRIENDS PAGE (everything on one screen)
+   Loads AFTER style.css and reuses its variables.
+   ========================================================= */
+html:has(.page-fam), .page-fam { height: 100%; overflow: hidden; }
+
+.fam-main {
+  position: relative; z-index: 1;
+  height: 100vh; height: 100dvh; width: 100%;
+  display: flex; flex-direction: column; gap: 14px;
+  padding: 84px 3.5vw 52px;
+}
+
+/* ---------- heading ---------- */
+.fam-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.head-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+.fam-head .btn { padding: 9px 18px; font-size: 0.88rem; }
+.fam-head h1 { font-size: clamp(1.3rem, 2.2vw, 1.8rem); font-weight: 700; line-height: 1.2; color: var(--text, inherit); }
+.fam-head p { color: var(--muted); font-size: 0.9rem; margin-top: 4px; }
+
+/* ---------- group (FAMILY / FRIENDS) ---------- */
+.group { flex: 1 1 0; min-height: 0; display: flex; flex-direction: column; gap: 8px; }
+.group-head { display: flex; align-items: center; gap: 12px; }
+.group-head h2 {
+  font-family: "JetBrains Mono", monospace; font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--a1);
+}
+.group-head::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+
+/* ---------- photo row: each tile's width follows its photo's shape ---------- */
+.row { flex: 1 1 0; min-height: 0; display: flex; gap: clamp(10px, 1.2vw, 18px); }
+.tile {
+  position: relative; flex: var(--ar, 1.3) 1 0; min-width: 0; min-height: 0;
+  padding: 0; margin: 0; cursor: pointer; overflow: hidden; display: block;
+  background: #0b0b14; border: 1px solid var(--border); border-radius: 16px;
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+  animation: pop 0.6s ease backwards; animation-delay: calc(var(--i, 0) * 70ms);
+}
+.tile:hover, .tile:focus-visible {
+  transform: translateY(-3px); border-color: var(--a2);
+  box-shadow: 0 14px 40px rgba(124, 92, 255, 0.32); outline: none;
+}
+.tile::before { /* blurred copy of the photo fills the space around it */
+  content: ""; position: absolute; inset: -20px; z-index: 0;
+  background: var(--img) center / cover no-repeat; filter: blur(22px) saturate(1.1); opacity: 0.9;
+}
+.tile img {
+  position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%;
+  object-fit: contain; display: block; transition: transform 0.5s ease;
+}
+.tile:hover img { transform: scale(1.03); }
+
+.tile-cap {
+  position: absolute; left: 8px; bottom: 8px; z-index: 2; max-width: calc(100% - 16px);
+  padding: 4px 11px; border-radius: 9px; font-size: 0.8rem; font-weight: 500; line-height: 1.3; color: #fff;
+  background: rgba(8, 10, 24, 0.72); border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* shown if a photo file is missing */
+.tile .placeholder {
+  position: absolute; inset: 0; z-index: 1; display: none; place-items: center; font-size: 2.6rem;
+  background: linear-gradient(135deg, rgba(124, 92, 255, 0.25), rgba(0, 224, 198, 0.2));
+}
+.tile.missing img { display: none; }
+.tile.missing .placeholder { display: grid; }
+
+@keyframes pop { from { opacity: 0; transform: translateY(14px); } }
+
+/* ---------- lightbox ---------- */
+html.lb-open, html.lb-open body { overflow: hidden !important; }
+.lb {
+  position: fixed; inset: 0; z-index: 200; display: none; align-items: center; justify-content: center;
+  padding: 4vh 4vw; background: rgba(5, 5, 12, 0.88);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+}
+.lb.open { display: flex; animation: lbfade 0.25s ease; }
+@keyframes lbfade { from { opacity: 0; } }
+.lb-inner { display: flex; flex-direction: column; align-items: center; gap: 16px; max-width: min(1100px, 92vw); max-height: 92vh; }
+.lb-inner img {
+  max-width: 100%; max-height: 78vh; width: auto; height: auto; object-fit: contain;
+  border-radius: 12px; background: #111; box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+}
+.lb-cap { text-align: center; color: #e8e8f2; }
+.lb-cap .lb-cat { color: #7c5cff; font-family: "JetBrains Mono", monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
+.lb-cap h3 { font-size: 1.2rem; }
+.lb-count { color: #9a9ab5; font-family: "JetBrains Mono", monospace; font-size: 0.78rem; margin-top: 6px; }
+.lb-btn {
+  position: absolute; width: 46px; height: 46px; border-radius: 50%; cursor: pointer; font-size: 1.3rem; line-height: 1;
+  display: grid; place-items: center; background: rgba(255, 255, 255, 0.1); color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2); transition: background 0.2s, transform 0.2s;
+}
+.lb-btn:hover { background: rgba(124, 92, 255, 0.6); transform: scale(1.08); }
+.lb-btn:focus-visible { outline: 2px solid #00e0c6; outline-offset: 2px; }
+.lb-close { top: 18px; right: 18px; }
+.lb-prev { left: 18px; top: 50%; margin-top: -23px; }
+.lb-next { right: 18px; top: 50%; margin-top: -23px; }
+
+/* ---------- short screens ---------- */
+@media (max-height: 700px) {
+  .fam-main { padding-top: 72px; padding-bottom: 44px; gap: 8px; }
+  .fam-head p { display: none; }
+}
+
+/* ---------- phones & narrow tablets: stack and scroll ---------- */
+@media (max-width: 900px) {
+  html:has(.page-fam), .page-fam { height: auto; overflow: auto; }
+  .fam-main { height: auto; padding: 84px 5vw 60px; gap: 22px; }
+  .group { flex: none; }
+  .row { flex-direction: column; }
+  .tile { flex: none; aspect-ratio: var(--ar, 1.3); }
+  .lb-prev { left: 8px; } .lb-next { right: 8px; } .lb-close { top: 10px; right: 10px; }
+  .lb-btn { width: 40px; height: 40px; }
+}
