@@ -42,15 +42,16 @@ html:has(.page-ach), .page-ach { height: 100%; overflow: hidden; }
 .edu-row span { grid-column: 1; color: var(--muted); font-size: 0.76rem; }
 .edu-row em { grid-column: 2; grid-row: 1 / span 2; align-self: center; font-style: normal; font-family: "JetBrains Mono", monospace; font-size: 0.72rem; color: var(--a2); }
 
-.ach-intro .cta { margin: 4px 0 0; gap: 12px; }
-.ach-intro .btn { padding: 12px 24px; font-size: 0.95rem; }
+.ach-intro { overflow: hidden; }
+.ach-intro .cta { margin: 4px 0 0; gap: 8px; flex-wrap: wrap; }
+.ach-intro .btn { padding: 9px 16px; font-size: 0.85rem; }
 
 /* ---------- right: three categories on one screen ---------- */
 .cats {
   display: grid; grid-template-columns: 3fr 2fr; grid-template-rows: minmax(0, 1.2fr) minmax(0, 1fr);
   gap: 14px clamp(16px, 2vw, 30px);
   height: 100%; min-height: 0; min-width: 0;
-  overflow-x: hidden; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--a1) transparent;
+  overflow: hidden;
   padding: 6px 8px 6px 0; margin: -6px -8px -6px 0;
 }
 .cat { display: flex; flex-direction: column; gap: 8px; min-height: 0; min-width: 0; }
@@ -169,6 +170,8 @@ html.lb-open, html.lb-open body { overflow: hidden !important; }
   .ach-intro .cta { justify-content: center; }
   .edu-mini { width: 100%; text-align: left; }
 
+  .ach-intro { overflow: visible; }
+  .ach-intro .btn { padding: 12px 22px; font-size: 0.95rem; }
   .cats { display: flex; flex-direction: column; gap: 30px; height: auto; overflow: visible; padding: 0; margin: 0; }
   .cat-head { justify-content: center; }
   .cat-head .note { display: block; flex: 0 0 100%; text-align: center; white-space: normal; }
