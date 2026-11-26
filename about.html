@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="About Harold Rhainestone A. Villarin – personal information." />
+  <title>Harold Rhainestone A. Villarin | Personal Info</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&family=Bricolage+Grotesque:wght@700&family=IBM+Plex+Sans:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Styles for this page only (all names start with "pi-" so they don't clash with style.css) -->
+  <style>
+    body.page-about { height: auto; min-height: 100vh; overflow-x: hidden; overflow-y: auto; }
+
+    .pi-main {
+      --pi-card: rgba(11, 25, 56, 0.94);
+      --pi-line: #1b2f5c;
+      --pi-blue: #4f8cff;
+      --pi-text: #eef3ff;
+      --pi-label: #a9b8dc;
+      position: relative;
+      z-index: 1;
+      box-sizing: border-box;
+      width: min(1700px, calc(100% - 24px));
+      margin: 90px auto 24px;
+      padding: clamp(14px, 2.6vw, 44px);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      color: var(--pi-text);
+      font-family: "IBM Plex Sans", sans-serif;
+      text-align: left;
+      border: 1px solid var(--pi-line);
+      border-top: 2px solid var(--pi-blue);
+      background-color: #071126;
+      background-image:
+        linear-gradient(rgba(79, 140, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(79, 140, 255, 0.06) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .pi-main *, .pi-main *::before, .pi-main *::after { box-sizing: border-box; }
+    .pi-main :where(h1, p, dl, dt, dd) { margin: 0; padding: 0; }
+
+    .pi-card { background: var(--pi-card); border: 1px solid var(--pi-line); border-radius: 18px; }
+    .pi-profile { padding: 22px 34px 30px; }
+
+    /* Header */
+    .pi-head { display: flex; align-items: center; gap: 26px; padding-bottom: 16px; border-bottom: 1px solid var(--pi-line); }
+    .pi-avatar {
+      position: relative; flex: 0 0 74px; width: 74px; height: 74px;
+      border: 2px solid var(--pi-blue); border-radius: 50%; overflow: hidden;
+      display: grid; place-items: center; background: #14264f;
+      box-shadow: 0 0 20px rgba(79, 140, 255, 0.25);
+      font-weight: 700; font-size: 22px;
+    }
+    .pi-avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .pi-main .pi-name { font-family: "Bricolage Grotesque", sans-serif; font-size: clamp(22px, 3vw, 32px); line-height: 1.2; color: var(--pi-text); }
+    .pi-main .pi-sub { margin-top: 6px; font-family: "IBM Plex Mono", monospace; font-size: 15px; color: var(--pi-blue); }
+
+    /* Label + value pairs */
+    .pi-grid { display: grid; gap: 16px 24px; }
+    .pi-grid > div { min-width: 0; }
+    .pi-main dt { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pi-label); }
+    .pi-main dd { margin-top: 3px; font-size: 17px; font-weight: 700; line-height: 1.35; color: var(--pi-text); overflow-wrap: anywhere; }
+    .pi-main dd a { color: inherit; text-decoration: none; }
+    .pi-main dd a:hover { color: var(--pi-blue); }
+
+    .pi-three { grid-template-columns: repeat(3, 1fr); margin-top: 20px; }
+    .pi-col1 { grid-column: 1; }
+    .pi-col3 { grid-column: 3; }
+    .pi-two { grid-template-columns: repeat(2, 1fr); margin-top: 16px; }
+    .pi-five { grid-template-columns: repeat(5, 1fr); padding: 24px 34px; }
+
+    .pi-dot { display: inline-block; width: 9px; height: 9px; margin-right: 10px; border-radius: 50%; background: var(--pi-blue); box-shadow: 0 0 10px 3px rgba(79, 140, 255, 0.45); }
+
+    /* Four small tiles */
+    .pi-tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .pi-tile { display: flex; align-items: center; gap: 18px; padding: 16px 20px; min-width: 0; }
+    .pi-icon { flex: 0 0 40px; width: 40px; height: 40px; display: grid; place-items: center; border: 1px solid #24407a; border-radius: 10px; background: #13264f; }
+    .pi-icon svg { width: 22px; height: 22px; fill: none; stroke: var(--pi-blue); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .pi-tile dt { font-weight: 700; }
+    .pi-tile dd { font-size: 16px; }
+
+    /* Motto */
+    .pi-motto { display: flex; gap: 20px; padding: 16px 28px; border-left: 3px solid var(--pi-blue); }
+    .pi-mark { font-family: "Bricolage Grotesque", sans-serif; font-size: 48px; line-height: 1; color: var(--pi-blue); }
+    .pi-main .pi-motto p { font-style: italic; font-size: 17px; }
+    .pi-main .pi-motto span.pi-caption { display: block; margin-top: 5px; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pi-label); }
+
+    /* Blanks still to be filled in */
+    .pi-main .todo { color: #6f83b3; font-weight: 400; font-style: italic; }
+
+    .pi-main .cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 8px; }
+    .pi-main .cta .btn.ghost { color: var(--pi-text); border-color: var(--pi-line); }
+    .pi-main .copyright { position: static; text-align: center; color: var(--pi-label); }
+
+    @media (max-width: 900px) {
+      .pi-three { grid-template-columns: repeat(2, 1fr); }
+      .pi-col1, .pi-col3 { grid-column: auto; }
+      .pi-five { grid-template-columns: repeat(3, 1fr); }
+      .pi-tiles { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 560px) {
+      .pi-profile { padding: 18px; }
+      .pi-three, .pi-two, .pi-tiles { grid-template-columns: 1fr; }
+      .pi-five { grid-template-columns: repeat(2, 1fr); padding: 18px; }
+      .pi-head { gap: 16px; }
+    }
+  </style>
+</head>
+<body class="page-about">
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-dot" id="cursorDot"></div>
+
+  <div class="bg-fixed"><canvas id="bg"></canvas></div>
+  <div class="orb orb-about"></div>
+
+  <header class="nav">
+    <a href="index.html" class="logo">&lt;HV<span>/</span>&gt;</a>
+    <div class="nav-right">
+      <a href="index.html">Home</a>
+      <a href="about.html" class="active">Personal Info</a>
+      <a href="achievements.html">Achievements</a>
+      <a href="family.html">Family &amp; Friends</a>
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme">🌙</button>
+    </div>
+  </header>
+
+  <!-- HOW TO EDIT: replace each "Add ..." text with your info, then delete class="todo" from that line. -->
+  <main class="pi-main">
+
+    <section class="pi-card pi-profile" aria-label="Personal information">
+      <div class="pi-head">
+        <div class="pi-avatar">
+          <span>HV</span>
+          <img src="me.jpg" alt="Harold Rhainestone A. Villarin" onerror="this.remove()" />
+        </div>
+        <div>
+          <h1 class="pi-name">Harold Rhainestone A. Villarin</h1>
+          <p class="pi-sub">BSIT • 1st Year</p>
+        </div>
+      </div>
+
+      <dl class="pi-grid pi-three">
+        <div><dt>Gender</dt><dd class="todo">Add gender</dd></div>
+        <div><dt>Status</dt><dd class="todo">Add status</dd></div>
+        <div><dt>Age</dt><dd>18</dd></div>
+
+        <div><dt>Birthday</dt><dd>April 19, 2008</dd></div>
+        <div><dt>Address</dt><dd>Baguio City, Philippines</dd></div>
+        <div><dt>Phone Number</dt><dd class="todo">Add phone number</dd></div>
+
+        <div><dt>School</dt><dd>University of the Cordilleras</dd></div>
+        <div><dt>Year Level</dt><dd>1st Year</dd></div>
+        <div><dt>Program</dt><dd>Information Technology</dd></div>
+
+        <div class="pi-col1"><dt>College</dt><dd>CITCS</dd></div>
+        <div class="pi-col3"><dt>Email</dt><dd><a href="mailto:villarinharoldrhainestone@gmail.com">villarinharoldrhainestone@gmail.com</a></dd></div>
+      </dl>
+
+      <dl class="pi-grid pi-two">
+        <div><dt>Father's Name</dt><dd class="todo">Add father's name</dd></div>
+        <div><dt>Mother's Name</dt><dd class="todo">Add mother's name</dd></div>
+      </dl>
+    </section>
+
+    <section class="pi-card" aria-label="More details">
+      <dl class="pi-grid pi-five">
+        <div><dt>Blood Type</dt><dd class="todo">Add blood type</dd></div>
+        <div><dt>Eye Color</dt><dd class="todo">Add eye color</dd></div>
+        <div><dt>Height</dt><dd class="todo">Add height</dd></div>
+        <div><dt>Weight</dt><dd class="todo">Add weight</dd></div>
+        <div><dt>Shoe Size</dt><dd class="todo">Add shoe size</dd></div>
+
+        <div><dt>Zodiac Sign</dt><dd>Aries</dd></div>
+        <div><dt>Birthplace</dt><dd class="todo">Add birthplace</dd></div>
+        <div><dt>Hometown</dt><dd class="todo">Add hometown</dd></div>
+        <div><dt>Nationality</dt><dd>Filipino</dd></div>
+        <div><dt>Religion</dt><dd><span class="pi-dot" aria-hidden="true"></span><span class="todo">Add religion</span></dd></div>
+      </dl>
+    </section>
+
+    <div class="pi-tiles">
+      <div class="pi-card pi-tile">
+        <span class="pi-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 4h16v13H9l-5 4z"/></svg></span>
+        <dl><dt>Languages</dt><dd>English • Filipino</dd></dl>
+      </div>
+      <div class="pi-card pi-tile">
+        <span class="pi-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="11" rx="5.5"/><path d="M6 12.5h4M8 10.5v4M15.5 13.5h.01M18 11.5h.01"/></svg></span>
+        <dl><dt>Hobbies</dt><dd class="todo">Add hobbies</dd></dl>
+      </div>
+      <div class="pi-card pi-tile">
+        <span class="pi-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20s-8-4.9-8-10.5A4.5 4.5 0 0 1 12 7a4.5 4.5 0 0 1 8 2.5C20 15.1 12 20 12 20z"/></svg></span>
+        <dl><dt>Interests</dt><dd>Football • Tech • Design</dd></dl>
+      </div>
+      <div class="pi-card pi-tile">
+        <span class="pi-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 17h6M10 21h4M12 3a6 6 0 0 0-3 11v3h6v-3a6 6 0 0 0-3-11z"/></svg></span>
+        <dl><dt>Skills</dt><dd class="todo">Add skills</dd></dl>
+      </div>
+    </div>
+
+    <section class="pi-card pi-motto" aria-label="My motto">
+      <span class="pi-mark" aria-hidden="true">&ldquo;</span>
+      <div>
+        <p class="todo">Add your motto here</p>
+        <span class="pi-caption">My Motto</span>
+      </div>
+    </section>
+
+    <div class="cta">
+      <a href="mailto:villarinharoldrhainestone@gmail.com" class="btn primary magnetic">Contact me ✉️</a>
+      <a href="achievements.html" class="btn ghost magnetic">Achievements</a>
+      <a href="family.html" class="btn ghost magnetic">Family &amp; Friends</a>
+      <a href="index.html" class="btn ghost magnetic">← Back home</a>
+    </div>
+
+    <p class="copyright">&copy; 2026 Harold Rhainestone A. Villarin - BSIT</p>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
